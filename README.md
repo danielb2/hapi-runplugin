@@ -11,7 +11,7 @@ Useful for easily displaying route info and for testing the plugin
 - `-h`, `--help` - display help
 - `-l`, `--labels` - additional label connections
 - `-o`, `--options` - JSON file containing options to pass to plugin
-- `-p`, `--path` - path to plugin or installed plugin name
+- `-p`, `--path` - path to plugin or installed plugin name (CWD)
 - `-s`, `--show` - shows requests to the server
 
 

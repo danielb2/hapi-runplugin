@@ -26,7 +26,7 @@ const internals = {
         },
         p: {
             alias: 'path',
-            description: 'Path to plugin, or installed plugin-name',
+            description: 'Path to plugin, or installed plugin-name (CWD)',
             type: 'string'
         },
         P: {
@@ -34,6 +34,11 @@ const internals = {
             description: 'Port to run on',
             type: 'number',
             default: 3000
+        },
+        o: {
+            alias: 'options',
+            description: 'options to run with plugin',
+            type: 'string'
         },
         l: {
             alias: 'labels',
@@ -105,22 +110,26 @@ const main = function () {
 
     if (boss.path) {
 
-        if (boss.path[0] === '/' || !boss.path.match('/')) {
-            pluginPath = boss.path;
-        }
-        else {
-            pluginPath = Path.join(process.cwd(), boss.path);
-        }
+        pluginPath = internals.simplePath(boss.path);
     }
 
+    const plugin = {
+        plugin: {
+            register: pluginPath
+        }
+    };
+
+    if (boss.options) {
+
+        plugin.plugin.options = require(internals.simplePath(boss.options));
+    }
 
     internals.manifest = {
         connections: [connection],
         registrations: [{
             plugin: 'blipp'
-        }, {
-            plugin: pluginPath
-        }]
+        }, plugin
+        ]
     };
 
     Glue.compose(internals.manifest, { relativeTo: Path.join(__dirname, '/lib') }, (err, server) => {
@@ -143,6 +152,20 @@ const main = function () {
             });
         }
     });
+};
+
+
+internals.simplePath = function (path) {
+
+    let final = process.cwd();
+    if (path[0] === '/' || !path.match('/')) {
+        final = path;
+    }
+    else {
+        final = Path.join(process.cwd(), path);
+    }
+
+    return final;
 };
 
 
