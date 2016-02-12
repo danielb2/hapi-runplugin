@@ -6,12 +6,12 @@ Useful for easily displaying route info and for testing the plugin
 ## Command Line
 
 **hapi-runplugin** supports the following command line options:
-- `-h`, `--help` - display help
-- `-s`, `--show` - shows requests to the server
-- `-p`, `--path` - path to plugin or installed plugin name
 - `-P`, `--port` - port to run the server (3000)
+- `-h`, `--help` - display help
 - `-l`, `--labels` - additional label connections
 - `-o`, `--options` - JSON file containing options to pass to plugin
+- `-p`, `--path` - path to plugin or installed plugin name
+- `-s`, `--show` - shows requests to the server
 
 
 ### Example:
