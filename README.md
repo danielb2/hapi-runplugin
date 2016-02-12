@@ -1,5 +1,6 @@
 # hapi-runplugin
-Runs a hapi server using the plugin and uses blipp to output route info
+Runs a hapi server using the plugin and uses
+[blipp](https://github.com/danielb2/blipp) to output route info
 
 Useful for easily displaying route info and for testing the plugin
 
