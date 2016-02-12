@@ -5,6 +5,7 @@
 
 const Bossy = require('bossy');
 const Glue = require('glue');
+const HapiInfo = require('hapi-info');
 const Path = require('path');
 const Purdy = require('purdy');
 
@@ -128,7 +129,15 @@ const main = function () {
         connections: [connection],
         registrations: [{
             plugin: 'blipp'
-        }, plugin
+        }, {
+            plugin: {
+                register: 'hapi-info',
+                options: {
+                    path: null
+                }
+            }
+        },
+        plugin
         ]
     };
 
@@ -140,6 +149,8 @@ const main = function () {
         }
         else {
             server.start((err) => {
+
+                internals.displayPluginInfo(server);
 
                 if (err) {
                     Purdy(err);
@@ -154,6 +165,13 @@ const main = function () {
     });
 };
 
+
+internals.displayPluginInfo = function (server) {
+
+    const plugins = server.plugins['hapi-info'].info().plugins;
+
+    Purdy(plugins.splice(2,plugins.length));
+};
 
 internals.simplePath = function (path) {
 
