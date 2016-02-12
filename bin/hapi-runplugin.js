@@ -111,8 +111,6 @@ const main = function () {
         else {
             pluginPath = Path.join(process.cwd(), boss.path);
         }
-
-        Purdy(boss.path);
     }
 
 
