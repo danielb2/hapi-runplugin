@@ -21,7 +21,6 @@ Useful for easily displaying route info and for testing the plugin
 
 $ npm install hapi-runplugin hapi-info -g
 $ hapi-runplugin -p hapi-info
-$ hapi-runplugin -p hapi-info
 http://sanji.local:3000
   GET    /hapi-info
 
