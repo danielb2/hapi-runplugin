@@ -44,6 +44,11 @@ const internals = {
             alias: 'labels',
             description: 'Connection labels in case plugin uses specific connection',
             type: 'string'
+        },
+        d: {
+            alias: 'debug',
+            description: 'print hapi debug info',
+            type: 'boolean'
         }
     }
 };
@@ -102,14 +107,12 @@ const main = function () {
     };
 
     if (boss.labels) {
-
         connection.labels = boss.labels.split(',');
     }
 
     let pluginPath = process.cwd();
 
     if (boss.path) {
-
         pluginPath = internals.simplePath(boss.path);
     }
 
@@ -120,7 +123,6 @@ const main = function () {
     };
 
     if (boss.options) {
-
         plugin.plugin.options = require(internals.simplePath(boss.options));
     }
 
@@ -131,6 +133,11 @@ const main = function () {
         }, plugin
         ]
     };
+
+    if (boss.debug) {
+        internals.manifest.server = { debug: { log: ['error'], request: ['error'] } };
+    }
+
 
     Glue.compose(internals.manifest, { relativeTo: Path.join(__dirname, '/lib') }, (err, server) => {
 
