@@ -1,6 +1,6 @@
 {
   "name": "hapi-runplugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easily run a hapi-plugin as a server. Also view endpoints",
   "main": "bin/hapi-runplugin.js",
   "bin": {
